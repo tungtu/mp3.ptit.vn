@@ -90,6 +90,22 @@ public class Processor {
         return list;
     }
 
+    public List<String> handleSearch(Elements elements_data) throws IOException {
+        String name_song, url_detail, src_song;
+        List<String> list = new ArrayList<String>();
+
+        for (Element element : elements_data) {
+            name_song = element.select("a").attr("title");
+            url_detail = element.select("a").attr("title");
+
+            src_song = element.attr("data-id");
+
+            list.add(src_song);
+        }
+
+        return list;
+    }
+
     public List<String> showTest(String data) {
 
         List<String> list = new ArrayList<String>();
@@ -100,6 +116,19 @@ public class Processor {
         list.add(src_song);
 
         return list;
+    }
+
+    public Elements getDataSearch(String URL) {
+        try {
+
+            Document document = Jsoup.connect(URL).get();
+
+            return document.getElementsByClass("item-song");
+
+        } catch (IOException e) {
+            System.err.println("For '" + URL + "': " + e.getMessage());
+        }
+        return null;
     }
 
 }
