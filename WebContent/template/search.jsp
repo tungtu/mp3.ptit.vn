@@ -13,10 +13,6 @@
     <title>TRANG NGHE NHẠC MIỄN PHÍ</title>
     <link href="template/css/bootstrap.css" rel="stylesheet">
     <link href="template/css/style.css" rel="stylesheet">
-    <link href="template/css/theme.css" rel="stylesheet">
-    <link href="template/css/theme-elements.css" rel="stylesheet">
-    <link href="template/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -80,66 +76,20 @@
     </div>
     <div class="col-md-8">
         <div id="search-page"></div>
-        <div id="bxh-page">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a id="vn" href="#tab1" data-toggle="tab">BXH Việt Nam</a>
-                </li>
-                <li>
-                    <a id="am" href="#tab2" data-toggle="tab">BXH Châu Âu</a>
-                </li>
-                <li>
-                    <a id="hq" href="#tab3" data-toggle="tab">BXH Hàn Quốc</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab1">
-                    <ul class="listbxh_vietnam">
-                        <%  JsonArray lists_vn = (JsonArray) request.getAttribute("lists_vn");
-                            for (JsonElement str1 : lists_vn){
-                        %>
-                        <h3><%= str1.getAsJsonObject().get("name") %></h3>
-                        <iframe scrolling="no" width="640" height="180"
-                                src="http://mp3.zing.vn/embed/song/<%=
-                                str1.getAsJsonObject().get("id").getAsString() %>" frameborder="0"
-                                allowfullscreen="true"></iframe>
-                        <%
-                            }
-                        %>
-                    </ul>
-                </div>
-                <div class="tab-pane" id="tab2">
-                    <ul class="listbxh_aumy">
-                        <%  JsonArray lists_aumy = (JsonArray) request.getAttribute("lists_aumy");
-                            for (JsonElement str2 : lists_aumy){
-                        %>
-                            <h3><%= str2.getAsJsonObject().get("name") %></h3>
-                        <iframe scrolling="no" width="640" height="180"
-                                src="http://mp3.zing.vn/embed/song/<%=
-                                str2.getAsJsonObject().get("id").getAsString() %>" frameborder="0"
-                                allowfullscreen="true"></iframe>
-                        <%
-                            }
-                        %>
-                    </ul>
-                </div>
-                <div class="tab-pane" id="tab3">
-                    <ul class="listbxh_hanquoc">
-                        <%  JsonArray lists_hq = (JsonArray) request.getAttribute("lists_hq");
-                            for (JsonElement str3 : lists_hq){
-                        %>
-                        <h3><%= str3.getAsJsonObject().get("name") %></h3>
-                        <iframe scrolling="no" width="640" height="180"
-                                src="http://mp3.zing.vn/embed/song/<%=
-                                str3.getAsJsonObject().get("id").getAsString() %>" frameborder="0"
-                                allowfullscreen="true"></iframe>
-                        <%
-                            }
-                        %>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <h3>Search result:</h3>
+
+        <%  Elements rs_search = (Elements) request.getAttribute("rs_search");
+            for (Element element : rs_search){
+        %>
+        <h3><%= element.select("a").attr("title") %></h3>
+        <iframe scrolling="no" width="640" height="100"
+                src="http://mp3.zing.vn/embed/song/<%=
+                                element.attr("data-id") %>" frameborder="0"
+                allowfullscreen="true"></iframe>
+        <%
+            }
+        %>
+
     </div>
 </div>
 <div class="panel-footer">
