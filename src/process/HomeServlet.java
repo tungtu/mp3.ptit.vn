@@ -24,15 +24,15 @@ public class HomeServlet extends HttpServlet {
         String q = request.getParameter("q");
 
         if(q == null){
-            Processor processor = new Processor();
+//            Processor processor = new Processor();
+//
+//            String url_audio_format = "http://mp3.zing.vn/json/charts?op=get&type=song&id=";
+//
+//            request.setAttribute("lists_vn", processor.getListBXH(url_audio_format + "IWZ9Z08I"));
+//            request.setAttribute("lists_aumy", processor.getListBXH(url_audio_format + "IWZ9Z0BW"));
+//            request.setAttribute("lists_hq", processor.getListBXH(url_audio_format + "IWZ9Z0BO"));
 
-            String url_audio_format = "http://mp3.zing.vn/json/charts?op=get&type=song&id=";
-
-            request.setAttribute("lists_vn", processor.getListBXH(url_audio_format + "IWZ9Z08I"));
-            request.setAttribute("lists_aumy", processor.getListBXH(url_audio_format + "IWZ9Z0BW"));
-            request.setAttribute("lists_hq", processor.getListBXH(url_audio_format + "IWZ9Z0BO"));
-
-            request.getRequestDispatcher("template/home.jsp").forward(request, response);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
         else {
 
@@ -41,7 +41,7 @@ public class HomeServlet extends HttpServlet {
             Processor processor = new Processor();
 
             request.setAttribute("rs_search", processor.getDataSearch(q_search));
-            request.getRequestDispatcher("template/search.jsp").forward(request, response);
+            request.getRequestDispatcher("search.jsp").forward(request, response);
         }
 
 
